@@ -56,3 +56,49 @@ CREATE TABLE tb_cursos (
 INSERT INTO tb_cursos (id_cursos, nome, sigla, id_turnos) VALUES
 (52, 'Técnico em Informática', 'TI', 200),
 (54, 'Técnico em Administração', 'TA', 300);
+
+
+CREATE DATABASE I2_leonardo;
+USE DATABASE I2_leonardo;
+
+CREATE TABLE tb_pessoas (
+    id_pessoas INT PRIMARY KEY,
+    nome VARCHAR(45)NOT NULL,
+    data_nacimento DATE NOT NULL
+);
+
+CREATE TABLE tb_alunos  (
+    id_aluno INT PRIMARY KEY,
+	matricular INT NOT NULL,
+	id_pessoas INT
+	FOREIGN KEY (id_pessoas) REFERENCES tb_pessoas(id_pessoas)
+
+
+);
+
+
+CREATE TABLE tb_professores (
+    id_professores INT PRIMARY KEY,
+    matricular INT,
+    id_PESSOAS INT,
+    FOREIGN KEY (id_pessoas) REFERENCES tb_pessoas(id_pessoas)
+);
+
+CREATE TABLE tb_diciplina (
+    id_diciplina INT PRIMARY KEY,
+    nome VARCHAR (45) NOT NULL,
+	sigla VARCHAR (45) NOT NULL,
+    id_cursos INT,
+	id_professores int,
+    FOREIGN KEY (id_cursos) REFERENCES tb_cursos(id_cursos),
+	FOREIGN KEY (id_professores) REFERENCES tb_professores(id_professores)
+);
+
+CREATE TABLE tb_turnos (
+    id_turnos INT PRIMARY KEY,
+    nome VARCHAR (45) NOT NULL,
+	horario_inice TIME NOT NULL,
+     INT,
+	id_professores int,
+    FOREIGN KEY (id_cursos) REFERENCES tb_cursos(id_cursos),
+	FOREIGN KEY (id_professores) REFERENCES tb_professores(id_professores)
